@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav.xml"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/allFragment"
+        android:name="com.sdk.remotejobs103.all.AllFragment"
+        android:label="fragment_all"
+        tools:layout="@layout/fragment_all" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.sdk.remotejobs103.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.sdk.remotejobs103.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.sdk.remotejobs103.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+</navigation>
