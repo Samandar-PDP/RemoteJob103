@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
 class AllViewModel : ViewModel() {
-    private val repository = JobRepository(RetroInstance.provideApiService())
+    private val repository = JobRepository(RetroInstance.provideApiService(),null)
 
     private val _allState: MutableLiveData<AllState> = MutableLiveData()
     val allState: LiveData<AllState> get() = _allState
@@ -39,8 +39,8 @@ class AllViewModel : ViewModel() {
             _allState.postValue(AllState.Loading)
             try {
                 val response = repository.getAllJobs()
-                if (response.isSuccessful) {
-                    _allState.postValue(AllState.Success(response.body()?.jobs ?: emptyList()))
+                if (response?.isSuccessful == true) {
+                    _allState.postValue(AllState.Success(response?.body()?.jobs ?: emptyList()))
                 }
             } catch (e: Exception) {
                 _allState.postValue(AllState.Error(e.message.toString()))

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 
 class JobAdapter: ListAdapter<Job, JobAdapter.JobViewHolder>(DiffCallBack()) {
     lateinit var onClick: (Job) -> Unit
+    lateinit var onLongClick: (Job) -> Unit
 
     private class DiffCallBack : DiffUtil.ItemCallback<Job>() {
         override fun areItemsTheSame(oldItem: Job, newItem: Job): Boolean {
@@ -46,13 +47,17 @@ class JobAdapter: ListAdapter<Job, JobAdapter.JobViewHolder>(DiffCallBack()) {
                     .into(ivCompanyLogo)
 
                 tvJobTitle.text = job.title
-                tvDate.text = job.publication_date.split("T")[0]
+                tvDate.text = job.publication_date?.split("T")?.get(0).toString()
                 tvJobType.text = job.job_type
                 tvJobLocation.text = job.candidate_required_location
                 tvCompanyName.text = job.company_name
             }
             itemView.setOnClickListener {
                 onClick.invoke(job)
+            }
+            itemView.setOnLongClickListener {
+                onLongClick(job)
+                true
             }
         }
     }

@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
 class SearchViewModel : ViewModel() {
-    private val repository = JobRepository(RetroInstance.provideApiService())
+    private val repository = JobRepository(RetroInstance.provideApiService(),null)
     private val _state: MutableLiveData<SearchState> = MutableLiveData()
     val state: LiveData<SearchState> get() = _state
 
@@ -37,7 +37,7 @@ class SearchViewModel : ViewModel() {
             _state.postValue(SearchState.Loading)
             try {
                 val response = repository.searchJobs(query)
-                if (response.isSuccessful) {
+                if (response?.isSuccessful == true) {
                     _state.postValue(SearchState.Success(response.body()?.jobs ?: emptyList()))
                 }
             } catch (e: Exception) {

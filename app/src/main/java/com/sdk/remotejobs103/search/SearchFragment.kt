@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sdk.remotejobs103.R
 import com.sdk.remotejobs103.adapter.JobAdapter
@@ -67,6 +69,10 @@ class SearchFragment : Fragment() {
                     }
                 }
             }
+        }
+        jobAdapter.onClick = {
+            val bundle = bundleOf("job" to it)
+            findNavController().navigate(R.id.action_mainFragment_to_detailFragment, bundle)
         }
     }
 
